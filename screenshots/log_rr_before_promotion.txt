@@ -1,0 +1,68 @@
+mac@MacBook-Air-cua-Mac Downloads % chmod 400 udacity-keypair-secondary.pem                                                        
+mac@MacBook-Air-cua-Mac Downloads % ssh -i "udacity-keypair-secondary.pem" ec2-user@ec2-54-201-43-5.us-west-2.compute.amazonaws.com
+ssh: connect to host ec2-54-201-43-5.us-west-2.compute.amazonaws.com port 22: Operation timed out
+mac@MacBook-Air-cua-Mac Downloads % ssh -i "udacity-keypair-secondary.pem" ec2-user@ec2-54-201-43-5.us-west-2.compute.amazonaws.com
+^C
+mac@MacBook-Air-cua-Mac Downloads % chmod 400 udacity-keypair-secondary.pem
+mac@MacBook-Air-cua-Mac Downloads % ssh -i "udacity-keypair-secondary.pem" ec2-user@ec2-54-184-194-93.us-west-2.compute.amazonaws.com
+The authenticity of host 'ec2-54-184-194-93.us-west-2.compute.amazonaws.com (54.184.194.93)' can't be established.
+ED25519 key fingerprint is SHA256:wOYwjKUYLQuRg0DOAcbejSifl6XeVIi4B7rnjQgAAP4.
+This host key is known by the following other names/addresses:
+    ~/.ssh/known_hosts:4: ec2-54-201-43-5.us-west-2.compute.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-54-184-194-93.us-west-2.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Last login: Tue Oct 10 15:16:23 2023 from 171.225.184.152
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2025-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-2-10-80 ~]$ mysql -h udacity-replica.c3dzcnzjagdb.us-west-2.rds.amazonaws.com -P 3306  -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 18
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> USE udacity
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> DESCRIBE pet
+    -> \c
+MySQL [udacity]> DESCRIBE pet;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(20) | YES  |     | NULL    |       |
+| owner   | varchar(20) | YES  |     | NULL    |       |
+| species | varchar(20) | YES  |     | NULL    |       |
+| sex     | char(1)     | YES  |     | NULL    |       |
+| birth   | date        | YES  |     | NULL    |       |
+| death   | date        | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+MySQL [udacity]> INSERT INTO pet
+    ->    VALUES ('Jash','Brian','dog','f','1997-04-27',NULL);
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
+MySQL [udacity]> SELECT * FROM pet;
++----------+-------+---------+------+------------+-------+
+| name     | owner | species | sex  | birth      | death |
++----------+-------+---------+------+------------+-------+
+| Puffball | Diane | hamster | f    | 1999-03-30 | NULL  |
+| Mochi    | Sukey | rabbit  | f    | 1992-12-17 | NULL  |
++----------+-------+---------+------+------------+-------+
+2 rows in set (0.01 sec)
+
+MySQL [udacity]> 

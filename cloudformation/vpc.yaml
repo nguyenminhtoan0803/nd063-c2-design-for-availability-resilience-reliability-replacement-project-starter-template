@@ -8,27 +8,27 @@ Parameters:
   VpcCIDR:
     Description: Please enter the IP range (CIDR notation) for this VPC
     Type: String
-    Default: 10.1.0.0/16
+    Default: 10.2.0.0/16
 
   PublicSubnet1CIDR:
     Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
     Type: String
-    Default: 10.1.10.0/24
+    Default: 10.2.10.0/24
 
   PublicSubnet2CIDR:
     Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
     Type: String
-    Default: 10.1.11.0/24
+    Default: 10.2.11.0/24
 
   PrivateSubnet1CIDR:
     Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
     Type: String
-    Default: 10.1.20.0/24
+    Default: 10.2.20.0/24
 
   PrivateSubnet2CIDR:
     Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
     Type: String
-    Default: 10.1.21.0/24
+    Default: 10.2.21.0/24
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -54,13 +54,13 @@ Metadata:
       VpcCIDR:
         default: "VPC CIDR block"
       PublicSubnet1CIDR:
-        default: "Public Subnet 1"
+        default: "Secondary Public Subnet(us-west-2a)"
       PublicSubnet2CIDR:
-        default: "Public Subnet 2"
+        default: "Secondary Public Subnet(us-west-2b)"
       PrivateSubnet1CIDR:
-        default: "Private Subnet 1"
+        default: "Secondary Private Subnet(us-west-2a)"
       PrivateSubnet2CIDR:
-        default: "Private Subnet 2"
+        default: "Secondary Private Subnet(us-west-2b)"
 
 Resources:
   VPC:
